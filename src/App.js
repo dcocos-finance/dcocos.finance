@@ -13,7 +13,7 @@ import interestTheme from './theme';
 import Account from './components/account';
 import Footer from './components/footer';
 import Home from './components/home';
-import Stake from './components/stake';
+import Swap from './components/swap';
 import RewardsPools from './components/rewardPools';
 import Header from './components/header';
 // import Propose from './components/propose';
@@ -126,17 +126,21 @@ class App extends Component {
               background: "#f9fafb"
             }}>
               <Switch>
-                <Route path="/stake">
+                {/* <Route path="/stake">
                   <Footer />
                   <Stake />
-                </Route>
+                </Route> */}
                 <Route path="/staking">
                   <Footer />
                   <RewardsPools />
                 </Route>
-                <Route path="/vote">
+                {/* <Route path="/vote">
                   <Footer />
                   <Vote />
+                </Route> */}
+                <Route path="/swap">
+                  <Footer />
+                  <Swap />
                 </Route>
                 {/*<Route path="/claim">
                   <Footer />

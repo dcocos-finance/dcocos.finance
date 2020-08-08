@@ -13,6 +13,12 @@ import HowToVoteIcon from '@material-ui/icons/HowToVote';
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 import DetailsIcon from '@material-ui/icons/Details';
 
+import i18n from '../../i18n';
+
+import Store from "../../stores";
+const store = Store.store
+
+
 const styles = theme => ({
   root: {
     flex: 1,
@@ -173,12 +179,13 @@ const styles = theme => ({
   }
 });
 
+
 class Home extends Component {
 
   constructor(props) {
     super()
-
     this.state = {
+      languages: store.getStore('languages'),
     }
   }
 
@@ -189,16 +196,16 @@ class Home extends Component {
       <div className={ classes.root }>
         <Card className={ `${classes.card} ${classes.earn}` } onClick={ () => { this.nav(location.pathname+'staking') } }>
           <DetailsIcon className={ `${classes.icon} icon` } />
-          <Typography variant={'h3'} className={ `${classes.title} title` }>Stake</Typography>
+          <Typography variant={'h3'} className={ `${classes.title} title` }>{t('Home.Stake')}</Typography>
         </Card>
         {/*<Card className={ `${classes.card} ${classes.zap}` } onClick={ () => { this.nav(location.pathname+'propose') } }>
           <WbIncandescentIcon className={ `${classes.icon} icon` } />
           <Typography variant={'h3'} className={ `${classes.title} title` }>Propose</Typography>
         </Card>*/}
-        <Card className={ `${classes.card} ${classes.zap}` } onClick={ () => { this.nav(location.pathname+'vote') } }>
+        {/* <Card className={ `${classes.card} ${classes.zap}` } onClick={ () => { this.nav(location.pathname+'vote') } }>
           <HowToVoteIcon className={ `${classes.icon} icon` } />
           <Typography variant={'h3'} className={ `${classes.title} title` }>Vote</Typography>
-        </Card>
+        </Card> */}
         {/* <Card className={ `${classes.card} ${classes.zap}`} onClick={()=>{window.location.href="https://gov.yfii.finance"}}>
           <HowToVoteIcon className={ `${classes.icon} icon` } />
           <Typography variant={'h3'} className={ `${classes.title} title` }>Vote</Typography>
@@ -207,6 +214,10 @@ class Home extends Component {
           <AttachMoneyIcon className={ `${classes.icon} icon` } />
           <Typography variant={'h3'} className={ `${classes.title} title` }>claim</Typography>
         </Card>*/}
+        <Card className={ `${classes.card} ${classes.zap}` } onClick={ () => { this.nav(location.pathname+'swap') } }>
+          <HowToVoteIcon className={ `${classes.icon} icon` } />
+          <Typography variant={'h3'} className={ `${classes.title} title` }>{t('Home.Swap')}</Typography>
+        </Card>
       </div>
     )
   };

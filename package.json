@@ -1,6 +1,6 @@
 {
-  "homepage": "https://yfii.finance",
-  "name": "ygov-finance",
+  "homepage": "https://dcocos.finance",
+  "name": "dcocos-finance",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -45,9 +45,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "buildAndDeploy": "react-scripts build && echo 'yfii.finance' >> ./build/CNAME && gh-pages -d build",
-    "deploy": "echo 'yfii.finance' >> ./build/CNAME && gh-pages -d build",
-    "kovanDeploy": "echo 'kovan.yfii.finance' >> ./build/CNAME && gh-pages -d build -r git@github.com:yfii/kovan.yfii.finance.git"
+    "buildAndDeploy": "react-scripts build && echo 'dcocos.finance' >> ./build/CNAME && gh-pages -d build",
+    "deploy": "echo 'dcocos.finance' >> ./build/CNAME && gh-pages -d build",
+    "kovanDeploy": "echo 'dcocos.yfii.finance' >> ./build/CNAME && gh-pages -d build -r git@github.com:yfii/kovan.dcocos.finance.git"
   },
   "eslintConfig": {
     "extends": "react-app"
