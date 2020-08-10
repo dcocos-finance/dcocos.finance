@@ -120,5 +120,8 @@
   "Vote.NoProposals": "无提案",
   "Vote.Proposer": "提案人",
   "Vote.VotesFor": "支持",
-  "Vote.VotesAgainst": "反对"
+  "Vote.VotesAgainst": "反对",
+
+  "Swap.Title": "兑换dCOCOS",
+  "Swap.SwapAction":"兑换"
 }

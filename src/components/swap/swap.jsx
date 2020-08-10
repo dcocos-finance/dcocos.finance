@@ -10,6 +10,8 @@ import {
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
+  Input,
+  Link,
 } from '@material-ui/core';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
@@ -60,7 +62,7 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingBottom: '32px'
+    maxWidth: '400px'
   },
   introCenter: {
     minWidth: '100%',
@@ -125,6 +127,7 @@ const styles = theme => ({
     borderRadius: '50px',
     border: '1px solid '+colors.borderBlue,
     alignItems: 'center',
+    maxWidth: '500px',
     [theme.breakpoints.up('md')]: {
       width: '100%'
     }
@@ -328,7 +331,7 @@ class Swap extends Component {
   }
 
   render() {
-    const { classes, t } = this.props;
+    const { classes, i18n, t } = this.props;
     const {
       value,
       account,
@@ -349,123 +352,84 @@ class Swap extends Component {
 
     return (
       <div className={ classes.root }>
+        <Typography variant="h2" className={ classes.title }>
+          {t('Swap.Title')}
+        </Typography>
+        <Typography variant="h3" className={ classes.subtitle }>
+            <Link href="#" target="_blank" className=  { classes.linkLiquidity } >
+                {t('Stake.AddLiquidity')}
+            </Link>
+            <Link href="#" target="_blank" className={ classes.linkYield } >
+                {t('Footer.YieldCalculator')}
+            </Link>
+        </Typography>
+
         <div className={ classes.intro }>
           <Card className={ classes.addressContainer } onClick={this.overlayClicked}>
-            <Typography variant={ 'h3'} className={ classes.walletTitle } noWrap>{t('Wallet')}</Typography>
+            <Typography variant={ 'h3'} className={ classes.walletTitle } noWrap>{t('RewardPools.Wallet')}</Typography>
             <Typography variant={ 'h4'} className={ classes.walletAddress } noWrap>{ address }</Typography>
             <div style={{ background: '#DC6BE5', opacity: '1', borderRadius: '10px', width: '10px', height: '10px', marginRight: '3px', marginTop:'3px', marginLeft:'6px' }}></div>
           </Card>
-          <div className={ classes.between }>
-          </div>
-          <div>
-            <Button
-              className={ classes.stakeButton }
-              variant="outlined"
-              color="secondary"
-              disabled={ loading }
-              onClick={ () => { this.goToDashboard() } }
-            >
-              <Typography variant={ 'h4'}>{t('Vote.GoToVotingDashboard')}</Typography>
-            </Button>
-          </div>
         </div>
-        <div className={ classes.intro }>
-          <ToggleButtonGroup value={value} onChange={this.handleTabChange} aria-label="version" exclusive size={ 'small' }>
-            <ToggleButton value={0} aria-label="v1">
-              <Typography variant={ 'h4' }>{t('Vote.Done')}</Typography>
-            </ToggleButton>
-            <ToggleButton value={1} aria-label="v2">
-              <Typography variant={ 'h4' }>{t('Vote.Open')}</Typography>
-            </ToggleButton>
-          </ToggleButtonGroup>
-          <div className={ classes.between }>
-          </div>
-          <div className={ classes.proposalContainer }>
-            { votingStatus !== true &&
-              <Button
-                className={ classes.stakeButton }
-                variant="outlined"
-                color="secondary"
-                disabled={ loading }
-                onClick={ () => { this.onRegister() } }
-              >
-                <Typography variant={ 'h4'}>{t('Vote.RegisterToVote')}</Typography>
-              </Button>
-            }
-          </div>
+
+
+        <div>
+        <div className={ classes.overviewField }>
+  
+        <div className={ classes.balances }>
+          <Typography variant='h4' onClick='#' className={ classes.value } noWrap>{ 'Balance: ' + 20 } COCOS</Typography>
         </div>
-        { this.renderProposals() }
+        <div>
+          <TextField
+            fullWidth
+            disabled={ loading }
+            className={ classes.actionInput }
+            id={ 'amount' }
+            value={ 2000 }
+            error={ "" }
+            onChange={ this.onChange }
+            placeholder="0.00"
+            variant="outlined"
+            // InputProps={{
+            //   endAdornment: <InputAdornment position="end" className={ classes.inputAdornment }><Typography variant='h3' className={ '' }>{ 'COCOS' }</Typography></InputAdornment>,
+            //   startAdornment: <InputAdornment position="end" className={ classes.inputAdornment }>
+            //     <div className={ classes.assetIcon }>
+            //       <img
+            //         alt=""
+            //         // src={ require('../../assets/'+'-logo.png') }
+            //         src= ""
+            //         height="30px"
+            //       />
+            //     </div>
+            //   </InputAdornment>,
+            // }}
+          />
+
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={ () => { this.onSwap() }  }
+          >
+            <Typography variant={ 'h4'}>{t('Swap.SwapAction')}</Typography>
+          </Button>
+        </div>
+      </div>
+
+
+        </div>
+        
+        {/* { this.renderProposals() }
         { snackbarMessage && this.renderSnackbar() }
-        { loading && <Loader /> }
-        { modalOpen && this.renderModal() }
+        { loading && <Loader /> } */}
+
       </div>
     )
   }
 
-  renderProposals = () => {
-    const { proposals, expanded, value } = this.state
-    const { classes, t } = this.props
-    const width = window.innerWidth
-    const now = store.getStore('currentBlock')
-
-    const filteredProposals = proposals.filter((proposal) => {
-      return proposal.proposer != '0x0000000000000000000000000000000000000000'
-    }).filter((proposal) => {
-      return (value === 0 ? proposal.end < now : proposal.end > now)
-    })
-
-    if(filteredProposals.length === 0) {
-      return (
-        <div className={ classes.claimContainer }>
-          <Typography className={ classes.stakeTitle } variant={ 'h3'}>{t('Vote.NoProposals')}</Typography>
-        </div>
-      )
-    }
-
-    return filteredProposals.map((proposal) => {
-      var address = null;
-      if (proposal.proposer) {
-        address = proposal.proposer.substring(0,8)+'...'+proposal.proposer.substring(proposal.proposer.length-6,proposal.proposer.length)
-      }
-
-      return (
-        <ExpansionPanel className={ classes.expansionPanel } square key={ proposal.id+"_expand" } expanded={ expanded === proposal.id} onChange={ () => { this.handleChange(proposal.id) } }>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1bh-content"
-            id="panel1bh-header"
-          >
-            <div className={ classes.assetSummary }>
-              <div className={classes.headingName}>
-                <div className={ classes.assetIcon }>
-                  <Typography variant={ 'h3' }>{ proposal.id }</Typography>
-                </div>
-                <div>
-                  <div className={ classes.proposerAddressContainer }>
-                    <Typography variant={'h3'}>{address}</Typography>
-                    <Box ml={1} />
-                    <CopyIcon onClick={(e) => { this.copyAddressToClipboard(e, proposal.proposer) } } fontSize="small" />
-                  </div>
-                  <Typography variant={ 'h5' } className={ classes.grey }>{t('Vote.Proposer')}</Typography>
-                </div>
-              </div>
-              <div className={classes.heading}>
-                <Typography variant={ 'h3' }>{ proposal.totalForVotes ? (parseFloat(proposal.totalForVotes)/10**18).toLocaleString(undefined, { maximumFractionDigits: 4, minimumFractionDigits: 4 }) : 0 }</Typography>
-                <Typography variant={ 'h5' } className={ classes.grey }>{t('Vote.VotesFor')} { proposal.totalForVotes !== "0" ? ((parseFloat(proposal.totalForVotes)/10**18) / ((parseFloat(proposal.totalForVotes)/10**18) + (parseFloat(proposal.totalAgainstVotes)/10**18)) * 100).toFixed(2) : 0 }%</Typography>
-              </div>
-              <div className={classes.heading}>
-                <Typography variant={ 'h3' }>{ proposal.totalAgainstVotes ? (parseFloat(proposal.totalAgainstVotes)/10**18).toLocaleString(undefined, { maximumFractionDigits: 4, minimumFractionDigits: 4 }) : 0 }</Typography>
-                <Typography variant={ 'h5' } className={ classes.grey }>{t('Vote.VotesAgainst')} { proposal.totalAgainstVotes !== "0" ? ((parseFloat(proposal.totalAgainstVotes)/10**18) / ((parseFloat(proposal.totalForVotes)/10**18) + (parseFloat(proposal.totalAgainstVotes)/10**18)) * 100).toFixed(2) : 0 }%</Typography>
-              </div>
-            </div>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Proposal proposal={ proposal } startLoading={ this.startLoading } showSnackbar={ this.showSnackbar } />
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-      )
-    })
+  onSwap = () => {
+    alert('onswap');
   }
+
 
   goToDashboard = () => {
     window.open('https://gov.yfii.finance/', "_blank")

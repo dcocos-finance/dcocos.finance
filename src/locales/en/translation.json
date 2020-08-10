@@ -143,5 +143,8 @@
   "Vote.NoProposals": "No proposals",
   "Vote.Proposer": "Proposer",
   "Vote.VotesFor": "Votes For",
-  "Vote.VotesAgainst": "Votes Against"
+  "Vote.VotesAgainst": "Votes Against",
+
+  "Swap.Title": "Swap dCOCOS",
+  "Swap.SwapAction":"Swap"
 }
