@@ -219,9 +219,9 @@ class RewardPools extends Component {
     return (
       <div className={ classes.root }>
         <Typography variant="h2" className={ classes.title }>
-          <Link href={(i18n.language=== 'zh' || i18n.language === 'zh-CN')? "https://docs.qq.com/doc/DUnVXcFh3a0JwdGdN?pub=1&dver=2.1.0":"https://yfii.s3-ap-northeast-1.amazonaws.com/YFII_Innovative_DeFi_Yield_Farming_Token.pdf"} target="_blank">{t('RewardPools.Title')}</Link>
+         {t('RewardPools.Title')}
         </Typography>
-        {(i18n.language=== 'zh' || i18n.language === 'zh-CN') &&<Typography variant="h3" className={ classes.subtitle }><Link href="https://docs.qq.com/doc/DUnJVU0NXYUhPZVlC?pub=1&dver=2.1.0" target="_blank">{t('RewardPools.Subtitle')}</Link></Typography>}
+        {/* {(i18n.language=== 'zh' || i18n.language === 'zh-CN') &&<Typography variant="h3" className={ classes.subtitle }><Link href="https://docs.qq.com/doc/DUnJVU0NXYUhPZVlC?pub=1&dver=2.1.0" target="_blank">{t('RewardPools.Subtitle')}</Link></Typography>} */}
         <div className={ classes.intro }>
           <Card className={ classes.addressContainer } onClick={this.overlayClicked}>
             <Typography variant={ 'h3'} className={ classes.walletTitle } noWrap>{t('RewardPools.Wallet')}</Typography>
@@ -254,15 +254,17 @@ class RewardPools extends Component {
 
     let tokensList = rewardPool.tokens.map((rp) => { return rp.symbol }).join(', ')
     if(tokensList.length > 2) {
-      tokensList = (tokensList + ' ...')
+      tokensList = (tokensList)
     }
 
     return (<div className={ classes.rewardPoolContainer} key={ rewardPool.id } >
       <Typography variant='h3' className={ classes.poolName }>{ rewardPool.id }</Typography>
       <Typography variant='h5' className={ classes.poolWebsite }><a href={ rewardPool.link } target="_blank">{ rewardPool.website }</a></Typography>
       <Typography varian='h4' className={ classes.tokensList } align='center'>
-        { rewardPool.tokens.length > 0 && `${t('RewardPools.SupportedTokens')}: ` + tokensList  }
-        { rewardPool.tokens.length == 0 && t('RewardPools.NoSupportedTokens')  }
+        {t('RewardPools.ContractAddress')}<br/>
+        <a href="https://etherscan.io/address/{ rewardPool.contract_address }" target="_blank">
+          { rewardPool.contract_address.substring(0,6)+'...'+rewardPool.contract_address.substring(rewardPool.contract_address.length-4,rewardPool.contract_address.length) }
+        </a>
       </Typography>
       <Button
         variant="outlined"

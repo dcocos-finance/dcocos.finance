@@ -124,18 +124,17 @@ class Store {
           link: 'https://app.uniswap.org/#/swap',
           YieldCalculatorLink: "https://yieldfarming.info/yfii/ycrv/",   //收益率器地址
           depositsEnabled: true,
-          contract_address: '0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8',
           isVote: false,
           tokens: [
             {
-              id: 'uniswap-v2',
+              id: 'ycurvefi',
               address: '0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8',
-              symbol: 'Uniswap V2',
+              symbol: 'curve.fi',
               abi: config.erc20ABI,
               decimals: 18,
               rewardsAddress: config.yCurveFiRewardsAddress,
               rewardsABI: config.yCurveFiRewardsABI,
-              rewardsSymbol: 'dCOCOS',
+              rewardsSymbol: 'YFII',
               decimals: 18,
               balance: 0,
               stakedBalance: 0,
@@ -144,10 +143,9 @@ class Store {
           ]
         },
         {
-          id: 'Balancer',
+          id: 'balancer',
           name: 'Balancer Pool',
           website: 'pools.balancer.exchange',
-          contract_address: '0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8',
           link: 'https://bal.yfii.finance/#/pool/0x16cAC1403377978644e78769Daa49d8f6B6CF565',
           YieldCalculatorLink: "https://yieldfarming.info/yfii/yfii_dai/", //收益率器地址
           depositsEnabled: true,
@@ -161,7 +159,7 @@ class Store {
               decimals: 18,
               rewardsAddress: config.balancerRewardsAddress,
               rewardsABI: config.balancerRewardsABI,
-              rewardsSymbol: 'dCOCOS',
+              rewardsSymbol: 'YFII',
               decimals: 18,
               balance: 0,
               stakedBalance: 0,
@@ -169,31 +167,31 @@ class Store {
             }
           ]
         },
-        // {
-        //   id: 'Governance V2',
-        //   name: 'Governance V2          ',
-        //   website: 'gov.yfii.finance',
-        //   link: 'https://gov.yfii.finance/',
-        //   depositsEnabled: true,
-        //   hiddenHalfTime: true,
-        //   isVote: true,
-        //   tokens: [
-        //     {
-        //       id: 'yfii',
-        //       address: '0xa1d0E215a23d7030842FC67cE582a6aFa3CCaB83',
-        //       symbol: 'YFII',
-        //       abi: config.yfiABI,
-        //       decimals: 18,
-        //       rewardsAddress: config.governanceV2Address,
-        //       rewardsABI: config.governanceV2ABI,
-        //       rewardsSymbol: 'yCrv',
-        //       decimals: 18,
-        //       balance: 0,
-        //       stakedBalance: 0,
-        //       rewardsAvailable: 0,
-        //     }
-        //   ]
-        // }
+        {
+          id: 'Governance V2',
+          name: 'Governance V2          ',
+          website: 'gov.yfii.finance',
+          link: 'https://gov.yfii.finance/',
+          depositsEnabled: true,
+          hiddenHalfTime: true,
+          isVote: true,
+          tokens: [
+            {
+              id: 'yfii',
+              address: '0xa1d0E215a23d7030842FC67cE582a6aFa3CCaB83',
+              symbol: 'YFII',
+              abi: config.yfiABI,
+              decimals: 18,
+              rewardsAddress: config.governanceV2Address,
+              rewardsABI: config.governanceV2ABI,
+              rewardsSymbol: 'yCrv',
+              decimals: 18,
+              balance: 0,
+              stakedBalance: 0,
+              rewardsAvailable: 0,
+            }
+          ]
+        }
       ]
     }
 

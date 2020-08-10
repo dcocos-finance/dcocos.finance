@@ -44,6 +44,7 @@
   "Footer.BuiltWith": "builtwith",
   "Footer.Zap": "zap",
   "Footer.Insure": "insure",
+  "Footer.Audit": "Audit",
 
   "Insure.Intro": "Cover. Simple.",
   "Insure.Connect": "Connect wallet",
@@ -105,6 +106,7 @@
 
   "RewardPools.Title": "FYI on YFII: an open letter from YFII community",
   "RewardPools.Wallet": "Wallet",
+  "RewardPools.ContractAddress": "Contract Address",
   "RewardPools.WhichTokens": "Which tokens would you like to stake?",
   "RewardPools.Open": "Open",
   "RewardPools.SupportedTokens": "Supported Tokens",
@@ -131,6 +133,7 @@
   "Stake.Unstake": "Unstake",
   "Stake.ComeSoon": "Get yCRV rewards after voting a proposal.",
   "Stake.ComeSoon2": "Can be unlocked after blockNumber",
+  "Stake.AddLiquidity": "Add Liquidity for Token",
 
   "Vote.Wallet": "Wallet",
   "Vote.GoToVotingDashboard": "Go to Voting Dashboard",

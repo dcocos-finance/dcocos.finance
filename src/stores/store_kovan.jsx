@@ -124,13 +124,12 @@ class Store {
           link: 'https://app.uniswap.org/#/swap',
           YieldCalculatorLink: "https://yieldfarming.info/yfii/ycrv/",   //收益率器地址
           depositsEnabled: true,
-          contract_address: '0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8',
           isVote: false,
           tokens: [
             {
-              id: 'uniswap-v2',
+              id: 'ycurvefi',
               address: '0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8',
-              symbol: 'Uniswap V2',
+              symbol: 'curve.fi',
               abi: config.erc20ABI,
               decimals: 18,
               rewardsAddress: config.yCurveFiRewardsAddress,
@@ -144,10 +143,9 @@ class Store {
           ]
         },
         {
-          id: 'Balancer',
+          id: 'balancer',
           name: 'Balancer Pool',
           website: 'pools.balancer.exchange',
-          contract_address: '0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8',
           link: 'https://bal.yfii.finance/#/pool/0x16cAC1403377978644e78769Daa49d8f6B6CF565',
           YieldCalculatorLink: "https://yieldfarming.info/yfii/yfii_dai/", //收益率器地址
           depositsEnabled: true,
@@ -192,8 +190,8 @@ class Store {
         //       stakedBalance: 0,
         //       rewardsAvailable: 0,
         //     }
-        //   ]
-        // }
+          ]
+        }
       ]
     }
 

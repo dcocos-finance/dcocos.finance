@@ -176,7 +176,6 @@ class Footer extends Component {
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Link href="/">{t('Footer.Home')}</Link>
-            {this.renderRewards()}
           </Typography>
           <div className={classes.buttons}>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick}>{language}</Button>
@@ -189,12 +188,13 @@ class Footer extends Component {
             >
               <MenuItem onClick={this.handleClose.bind(this, 'zh')}>中文</MenuItem>
               <MenuItem onClick={this.handleClose.bind(this, 'en')}>English</MenuItem>
-              <MenuItem onClick={this.handleClose.bind(this, 'ja')}>日本語</MenuItem>
             </Menu>
+            <Link href="https://discord.gg/XQ4wnmz" target="_blank">Github</Link>
+            <Link href="https://discord.gg/XQ4wnmz" target="_blank">{t('Footer.Audit')}</Link>
+            <Link href="https://discord.gg/XQ4wnmz" target="_blank">FAQ</Link>
             <Link href="https://twitter.com/FinanceYfii" target="_blank">Twitter</Link>
             <Link href="https://t.me/yfiifinance" target="_blank">Telegram</Link>
             <Link href="https://discord.gg/XQ4wnmz" target="_blank">Discord</Link>
-            <Link color="inherit">wechat:myGrassU</Link>
           </div>
       </Toolbar>
       </AppBar>

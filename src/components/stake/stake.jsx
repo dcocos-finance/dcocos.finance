@@ -56,7 +56,6 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    maxWidth: '400px'
   },
   introCenter: {
     minWidth: '100%',
@@ -242,6 +241,16 @@ const styles = theme => ({
   },
   voteLockMessage: {
     margin: '20px'
+  },
+
+  linkLiquidity:{
+    // float: 'left'
+    paddingRight:'20px'
+  },
+
+  linkYield:{
+    // float: 'right'
+    paddingLeft:'20px'
   }
 })
 
@@ -400,12 +409,28 @@ class Stake extends Component {
     return (
       <div className={ classes.root }>
         <Typography variant="h2" className={ classes.title }>
-          <Link href={(i18n.language=== 'zh' || i18n.language === 'zh-CN')? "https://docs.qq.com/doc/DUnVXcFh3a0JwdGdN?pub=1&dver=2.1.0":"https://yfii.s3-ap-northeast-1.amazonaws.com/YFII_Innovative_DeFi_Yield_Farming_Token.pdf"} target="_blank">{t('Stake.Title')}</Link>
+          {pool.name}
         </Typography>
-        {(i18n.language=== 'zh' || i18n.language === 'zh-CN') &&<Typography variant="h3" className={ classes.subtitle }><Link href="https://docs.qq.com/doc/DUnJVU0NXYUhPZVlC?pub=1&dver=2.1.0" target="_blank">{t('Stake.Subtitle')}</Link></Typography>}
+        <Typography variant="h3" className={ classes.subtitle }>
+            <Link href={ pool.link } target="_blank" className=  { classes.linkLiquidity } >
+                {t('Stake.AddLiquidity')}
+            </Link>
+            <Link href={ pool.YieldCalculatorLink } target="_blank" className={ classes.linkYield } >
+                {t('Footer.YieldCalculator')}
+            </Link>
+        </Typography>
         <div className={ classes.intro }>
+          <Button
+            className={ classes.stakeButton }
+            variant="outlined"
+            color="secondary"
+            disabled={ loading }
+            onClick={ () => {  this.props.history.push('/staking') } }
+          >
+            <Typography variant={ 'h4'}>Back</Typography>
+          </Button>
           <Card className={ classes.addressContainer } onClick={this.overlayClicked}>
-            <Typography variant={ 'h3'} className={ classes.walletTitle } noWrap>{t('Stake.Wallet')}</Typography>
+            <Typography variant={ 'h3'} className={ classes.walletTitle } noWrap>Wallet</Typography>
             <Typography variant={ 'h4'} className={ classes.walletAddress } noWrap>{ address }</Typography>
             <div style={{ background: '#DC6BE5', opacity: '1', borderRadius: '10px', width: '10px', height: '10px', marginRight: '3px', marginTop:'3px', marginLeft:'6px' }}></div>
           </Card>

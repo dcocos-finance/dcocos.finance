@@ -42,6 +42,7 @@
   "Footer.BuiltWith": "builtwith",
   "Footer.Zap": "zap",
   "Footer.Insure": "insure",
+  "Footer.Audit": "审计",
 
   "Insure.Intro": "Cover. Simple.",
   "Insure.Connect": "连接钱包",
@@ -78,8 +79,9 @@
   "Footer.YieldCalculator": "收益率计算器",
   "Footer.Slogan": "本项目处于测试阶段，请自行评估风险。",
 
-  "RewardPools.Title": "YFII-创新型去中心化defi矿池",
+  "RewardPools.Title": "dCOCOS流动性挖矿",
   "RewardPools.Subtitle": "Pool2抵押方式与Balancer使用说明",
+  "RewardPools.ContractAddress": "合约地址",
   "RewardPools.Wallet": "钱包",
   "RewardPools.WhichTokens": "您希望抵押哪种代币?",
   "RewardPools.Open": "打开",
@@ -108,6 +110,7 @@
   "Stake.Unstake": "取消抵押",
   "Stake.ComeSoon": "投票后即可提取奖励。",
   "Stake.ComeSoon2": "解锁需要等到区块",
+  "Stake.AddLiquidity": "注入流动性获得质押代币",
 
   "Vote.Wallet": "钱包",
   "Vote.GoToVotingDashboard": "返回投票页面",
