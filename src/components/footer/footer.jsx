@@ -26,8 +26,9 @@ const store = Store.store
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 0,
     width: '100%',
+    paddingBottom: '20px'
   },
   appbar: {
     boxShadow: "none",
@@ -134,6 +135,10 @@ class Footer extends Component {
     this.setAnchorEl(event.currentTarget);
   };
 
+  handleCloseCommunity = (event) => {
+    
+  };
+
   handleClose = (language) => {
     let self = this
     i18n.changeLanguage(language).then(() => {
@@ -192,9 +197,26 @@ class Footer extends Component {
             <Link href="https://discord.gg/XQ4wnmz" target="_blank">Github</Link>
             <Link href="https://discord.gg/XQ4wnmz" target="_blank">{t('Footer.Audit')}</Link>
             <Link href="https://discord.gg/XQ4wnmz" target="_blank">FAQ</Link>
-            <Link href="https://twitter.com/FinanceYfii" target="_blank">Twitter</Link>
+            <Button aria-controls="simple-menu" aria-haspopup="true" onClick={this.handlClick}>
+              {t('Footer.Community')}
+            </Button>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={this.handleCloseCommunity}
+            >
+              <MenuItem onClick={this.handleCloseCommunity.bind(this)}>
+                <Link href="https://twitter.com/FinanceYfii" target="_blank">Twitter</Link>
+              </MenuItem>
+              <MenuItem onClick={this.handleCloseCommunity.bind(this)}>My account</MenuItem>
+              <MenuItem onClick={this.handleCloseCommunity.bind(this)}>Logout</MenuItem>
+            </Menu>
+
+            {/* <Link href="https://twitter.com/FinanceYfii" target="_blank">Twitter</Link>
             <Link href="https://t.me/yfiifinance" target="_blank">Telegram</Link>
-            <Link href="https://discord.gg/XQ4wnmz" target="_blank">Discord</Link>
+            <Link href="https://discord.gg/XQ4wnmz" target="_blank">Discord</Link> */}
           </div>
       </Toolbar>
       </AppBar>

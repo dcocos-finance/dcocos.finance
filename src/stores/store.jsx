@@ -119,22 +119,21 @@ class Store {
       rewardPools: [
         {
           id: 'Uniswap',
-          name: 'Uniswap Pool',
-          website: 'app.uniswap.org/#/swap',
-          link: 'https://app.uniswap.org/#/swap',
-          YieldCalculatorLink: "https://yieldfarming.info/yfii/ycrv/",   //收益率器地址
+          name: 'app.uniswap.org',
+          poolLink: config.uniswapPool.poolLink,
+          YieldCalculatorLink: config.uniswapPool.yieldCalculatorLink,  //收益率器地址
           depositsEnabled: true,
-          contract_address: '0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8',
+          contractAddress: config.uniswapPool.rewardContract,
           isVote: false,
           tokens: [
             {
               id: 'uniswap-v2',
-              address: '0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8',
+              address: config.uniswapPool.erc20Address,
               symbol: 'Uniswap V2',
-              abi: config.erc20ABI,
+              abi: config.uniswapPool.erc20ABI,
               decimals: 18,
-              rewardsAddress: config.yCurveFiRewardsAddress,
-              rewardsABI: config.yCurveFiRewardsABI,
+              rewardsAddress: config.uniswapPool.rewardContract,
+              rewardsABI: config.uniswapPool.rewardContractABI,
               rewardsSymbol: 'dCOCOS',
               decimals: 18,
               balance: 0,
@@ -145,22 +144,21 @@ class Store {
         },
         {
           id: 'Balancer',
-          name: 'Balancer Pool',
-          website: 'pools.balancer.exchange',
-          contract_address: '0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8',
-          link: 'https://bal.yfii.finance/#/pool/0x16cAC1403377978644e78769Daa49d8f6B6CF565',
-          YieldCalculatorLink: "https://yieldfarming.info/yfii/yfii_dai/", //收益率器地址
-          depositsEnabled: true,
+          name: 'pools.balancer.exchange',
+          poolLink: config.balancePool.poolLink,
+          contractAddress: config.balancePool.rewardContract,
+          YieldCalculatorLink: config.balancePool.yieldCalculatorLink,  //收益率器地址
+          depositsEnabled: false,
           isVote: false,
           tokens: [
             {
               id: 'bpt',
-              address: '0x16cAC1403377978644e78769Daa49d8f6B6CF565',
+              address: config.balancePool.erc20Address,
               symbol: 'BPT',
-              abi: config.erc20ABI,
+              abi: config.balancePool.erc20ABI,
               decimals: 18,
-              rewardsAddress: config.balancerRewardsAddress,
-              rewardsABI: config.balancerRewardsABI,
+              rewardsAddress: config.balancePool.rewardContract,
+              rewardsABI: config.balancePool.rewardContractABI,
               rewardsSymbol: 'dCOCOS',
               decimals: 18,
               balance: 0,

@@ -1,12 +1,10 @@
-import development from "./development.config";
-import production from "./production.config";
-import example from "./example.config";
-const env = process.env.APP_ENV || 'example';
+import kovan from "./kovan.config";
+import mainnet from "./mainnet.config";
+const env = process.env.APP_ENV || 'kovan';
 
 const config = {
-  example,
-  development,
-  production
+  kovan,
+  mainnet
 };
 
 export default config[env];

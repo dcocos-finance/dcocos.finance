@@ -13,6 +13,8 @@ import UnlockModal from '../unlock/unlockModal.jsx'
 import Store from "../../stores";
 import { colors } from '../../theme'
 
+import config from "../../config/config";
+
 import {
   ERROR,
   CONFIGURE_RETURNED,
@@ -259,11 +261,11 @@ class RewardPools extends Component {
 
     return (<div className={ classes.rewardPoolContainer} key={ rewardPool.id } >
       <Typography variant='h3' className={ classes.poolName }>{ rewardPool.id }</Typography>
-      <Typography variant='h5' className={ classes.poolWebsite }><a href={ rewardPool.link } target="_blank">{ rewardPool.website }</a></Typography>
+      <Typography variant='h5' className={ classes.poolWebsite }><a href={ rewardPool.poolLink } target="_blank">{ rewardPool.name }</a></Typography>
       <Typography varian='h4' className={ classes.tokensList } align='center'>
         {t('RewardPools.ContractAddress')}<br/>
-        <a href="https://etherscan.io/address/{ rewardPool.contract_address }" target="_blank">
-          { rewardPool.contract_address.substring(0,6)+'...'+rewardPool.contract_address.substring(rewardPool.contract_address.length-4,rewardPool.contract_address.length) }
+        <a href={ config.etherscanSite + "/address/"+ rewardPool.contractAddress } target="_blank">
+          { rewardPool.contractAddress.substring(0,6)+'...'+rewardPool.contractAddress.substring(rewardPool.contractAddress.length-4,rewardPool.contractAddress.length) }
         </a>
       </Typography>
       <Button
