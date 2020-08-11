@@ -437,8 +437,8 @@ class Stake extends Component {
         </div>
         <div className={ classes.overview }>
           <div className={ classes.overviewField }>
-            <Typography variant={ 'h4' } className={ classes.overviewTitle }>{t('Stake.YourBalance')}</Typography>
-            <Typography variant={ 'h3' } className={ classes.overviewValue }>{ pool.tokens[0].balance ? pool.tokens[0].balance.toFixed(2) : "0" }  { pool.tokens[0].symbol }</Typography>
+            <Typography variant={ 'h4' } className={ classes.overviewTitle }>{t('Stake.YourBalance')+'('+pool.tokens[0].symbol+')'}</Typography>
+            <Typography variant={ 'h3' } className={ classes.overviewValue }>{ pool.tokens[0].balance ? pool.tokens[0].balance.toFixed(2) : "0" }</Typography>
           </div>
           <div className={ classes.overviewField }>
             <Typography variant={ 'h4' } className={ classes.overviewTitle }>{t('Stake.CurrentlyStaked')}</Typography>
@@ -449,11 +449,11 @@ class Stake extends Component {
             <Typography variant={ 'h3' } className={ classes.overviewValue }>{day}day {hours}:{minutes}:{seconds}</Typography>
           </div> }
           <div className={ classes.overviewField }>
-            <Typography variant={ 'h4' } className={ classes.overviewTitle }>{t('Stake.RewardsAvailable')}</Typography>
-            <Typography variant={ 'h3' } className={ classes.overviewValue }>{ pool.tokens[0].rewardsSymbol == '$' ? pool.tokens[0].rewardsSymbol : '' } { pool.tokens[0].rewardsAvailable ? pool.tokens[0].rewardsAvailable.toFixed(2) : "0" } { pool.tokens[0].rewardsSymbol != '$' ? pool.tokens[0].rewardsSymbol : '' }</Typography>
+            <Typography variant={ 'h4' } className={ classes.overviewTitle }>{t('Stake.RewardsAvailable')+ '('+pool.tokens[0].rewardsSymbol+')'}</Typography>
+            <Typography variant={ 'h3' } className={ classes.overviewValue }>{ pool.tokens[0].rewardsAvailable ? pool.tokens[0].rewardsAvailable.toFixed(2) : "0" }</Typography>
           </div>
         </div>
-        { pool.id === 'Fee Rewards' &&
+        {/* { pool.id === 'Fee Rewards' &&
           <div className={ classes.actions }>
             <Typography className={ classes.stakeTitle } variant={ 'h3'}>{t('Stake.yCRVRewardRequirements')}</Typography>
             <div className={ classes.requirement }>
@@ -463,7 +463,7 @@ class Stake extends Component {
               <Typography variant={'h4'}>{t('Stake.YouMustHave')}</Typography><Typography variant={'h4'} className={ classes.check }>{ balanceValid ? <CheckIcon style={{ color: colors.green }} /> : <ClearIcon style={{ color: colors.red }} /> }</Typography>
             </div>
           </div>
-        }
+        } */}
         { value === 'options' && this.renderOptions() }
         { value === 'stake' && this.renderStake() }
         { value === 'claim' && this.renderClaim() }

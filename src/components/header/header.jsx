@@ -212,25 +212,25 @@ function Header(props) {
 
   return(<div></div>)
 
-  return (
-    <div className={ classes.root }>
-      <div className={ `${classes.earn}` } onClick={ () => { nav('earn') } }>
-        <Typography variant={'h3'} className={ headerValue===0?`titleActive`:`title` }>Earn</Typography>
-      </div>
-      <div className={ `${classes.zap}` } onClick={ () => { nav('zap') } }>
-        <Typography variant={'h3'} className={ headerValue===1?`titleActive`:`title` }>Zap</Typography>
-      </div>
-      <div className={ `${classes.apr}` } onClick={ () => { nav('apr') } }>
-        <Typography variant={'h3'} className={ headerValue===2?`titleActive`:`title` }>APR</Typography>
-      </div>
-      <div className={ `${classes.cover}` } onClick={ () => { nav('cover') } }>
-        <Typography variant={'h3'} className={ headerValue===3?`titleActive`:`title` }>Cover</Typography>
-      </div>
-      <div className={ `${classes.pool}` } onClick={ () => { nav('pool') } }>
-        <Typography variant={'h3'} className={ headerValue===4?`titleActive`:`title` }>Pool</Typography>
-      </div>
-    </div>
-  )
+  // return (
+  //   <div className={ classes.root }>
+  //     <div className={ `${classes.earn}` } onClick={ () => { nav('earn') } }>
+  //       <Typography variant={'h3'} className={ headerValue===0?`titleActive`:`title` }>Earn</Typography>
+  //     </div>
+  //     <div className={ `${classes.zap}` } onClick={ () => { nav('zap') } }>
+  //       <Typography variant={'h3'} className={ headerValue===1?`titleActive`:`title` }>Zap</Typography>
+  //     </div>
+  //     <div className={ `${classes.apr}` } onClick={ () => { nav('apr') } }>
+  //       <Typography variant={'h3'} className={ headerValue===2?`titleActive`:`title` }>APR</Typography>
+  //     </div>
+  //     <div className={ `${classes.cover}` } onClick={ () => { nav('cover') } }>
+  //       <Typography variant={'h3'} className={ headerValue===3?`titleActive`:`title` }>Cover</Typography>
+  //     </div>
+  //     <div className={ `${classes.pool}` } onClick={ () => { nav('pool') } }>
+  //       <Typography variant={'h3'} className={ headerValue===4?`titleActive`:`title` }>Pool</Typography>
+  //     </div>
+  //   </div>
+  // )
 }
 
 function a11yProps(index) {
