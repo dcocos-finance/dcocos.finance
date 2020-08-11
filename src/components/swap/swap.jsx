@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 import {
   Typography,
-  Box,
   Button,
   Card,
   TextField,
@@ -11,6 +10,7 @@ import {
   ExpansionPanelDetails,
   ExpansionPanelSummary,
   Input,
+  InputAdornment,
   Link,
 } from '@material-ui/core';
 import ToggleButton from '@material-ui/lab/ToggleButton';
@@ -30,17 +30,7 @@ import { colors } from '../../theme/theme'
 import {
   ERROR,
   CONFIGURE_RETURNED,
-  PROPOSE,
-  PROPOSE_RETURNED,
-  GET_PROPOSALS,
-  GET_PROPOSALS_RETURNED,
-  VOTE_FOR_RETURNED,
-  VOTE_AGAINST_RETURNED,
-  GOVERNANCE_CONTRACT_CHANGED,
-  GET_VOTE_STATUS,
-  GET_VOTE_STATUS_RETURNED,
-  REGISTER_VOTE_RETURNED,
-  REGISTER_VOTE
+  GET_BALANCES_RETURNED,
 } from '../../constants/constants'
 
 const styles = theme => ({
@@ -91,18 +81,42 @@ const styles = theme => ({
       width: '450',
     }
   },
-  actionButton: {
+  balances: {
+    width: '100%',
+    textAlign: 'right',
+    paddingRight: '20px',
+    cursor: 'pointer'
+  },
+  actions: {
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    maxWidth: '900px',
+    flexWrap: 'wrap',
+    background: colors.white,
+    border: '1px solid '+colors.borderBlue,
+    padding: '28px 30px',
+    borderRadius: '50px',
+    marginTop: '40px'
+  },
+  actionContainer: {
+    minWidth: 'calc(50% - 40px)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '20px'
+  },
+  primaryButton: {
     '&:hover': {
       backgroundColor: "#2F80ED",
     },
-    padding: '12px',
+    padding: '20px 32px',
     backgroundColor: "#2F80ED",
-    borderRadius: '1rem',
-    border: '1px solid #E1E1E1',
+    borderRadius: '50px',
     fontWeight: 500,
-    [theme.breakpoints.up('md')]: {
-      padding: '15px',
-    }
+  },
+  stakeButtonText: {
+    fontWeight: '700',
+    color: 'white',
   },
   buttonText: {
     fontWeight: '700',
@@ -225,6 +239,17 @@ const styles = theme => ({
   stakeButton: {
     minWidth: '300px'
   },
+
+  title: {
+    padding: '12px',
+    textAlign: 'center'
+  },
+  subtitle: {
+    padding: '12px',
+    borderRadius: '0.75rem',
+    textAlign: 'center'
+  },
+
   proposerAddressContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -248,82 +273,43 @@ class Swap extends Component {
     super()
 
     const account = store.getStore('account')
-    const proposals = store.getStore('proposals')
-    const votingStatus = store.getStore('votingStatus')
+    const pool = store.getStore('rewardPools')[2]
 
     this.state = {
-      loading: false,
+      pool: pool,
+      loading: !(account || pool),
       account: account,
-      proposals: proposals,
-      value: 1,
-      votingStatus: votingStatus,
     }
-
-    dispatcher.dispatch({ type: GET_PROPOSALS, content: {} })
-    dispatcher.dispatch({ type: GET_VOTE_STATUS, content: {} })
   }
 
   componentWillMount() {
     emitter.on(ERROR, this.errorReturned);
     emitter.on(CONFIGURE_RETURNED, this.configureReturned)
-    emitter.on(PROPOSE_RETURNED, this.showHash)
-    emitter.on(GET_PROPOSALS_RETURNED, this.proposalsReturned)
-    emitter.on(VOTE_FOR_RETURNED, this.showHash);
-    emitter.on(VOTE_AGAINST_RETURNED, this.showHash);
-    emitter.on(GET_VOTE_STATUS_RETURNED, this.voteStatusReturned);
-    emitter.on(REGISTER_VOTE_RETURNED, this.registerVoteReturned);
+    emitter.on(GET_BALANCES_RETURNED, this.balancesReturned);
   }
 
   componentWillUnmount() {
     emitter.removeListener(ERROR, this.errorReturned);
     emitter.removeListener(CONFIGURE_RETURNED, this.configureReturned)
-    emitter.removeListener(PROPOSE_RETURNED, this.showHash)
-    emitter.removeListener(GET_PROPOSALS_RETURNED, this.proposalsReturned)
-    emitter.removeListener(VOTE_FOR_RETURNED, this.showHash);
-    emitter.removeListener(VOTE_AGAINST_RETURNED, this.showHash);
-    emitter.removeListener(GET_VOTE_STATUS_RETURNED, this.voteStatusReturned);
-    emitter.removeListener(REGISTER_VOTE_RETURNED, this.registerVoteReturned);
+    emitter.removeListener(GET_BALANCES_RETURNED, this.balancesReturned);
   };
 
   errorReturned = (error) => {
     this.setState({ loading: false })
   };
 
-  registerVoteReturned = (txHash) => {
-    this.setState({
-      votingStatus: store.getStore('votingStatus'),
-      loading: false
+
+  balancesReturned = () => {
+    const currentPool = store.getStore('currentPool')
+    const pools = store.getStore('rewardPools')
+    let newPool = pools.filter((pool) => {
+      return pool.id === currentPool.id
     })
-    this.showSnackbar(txHash, 'Hash')
-  };
 
-  voteStatusReturned = () => {
-    this.setState({
-      votingStatus: store.getStore('votingStatus'),
-      loading: false
-    })
-  }
-
-  proposalsReturned = () => {
-    const proposals = store.getStore('proposals')
-    this.setState({ proposals: proposals, loading: false })
-  }
-
-  showHash = (txHash) => {
-    this.showSnackbar(txHash, 'Hash')
-  };
-
-  showAddressCopiedSnack = () => {
-    this.showSnackbar("Address Copied to Clipboard", 'Success')
-  }
-
-  showSnackbar = (message, type) => {
-    this.setState({ snackbarMessage: null, snackbarType: null, loading: false })
-    const that = this
-    setTimeout(() => {
-      const snackbarObj = { snackbarMessage: message, snackbarType: type }
-      that.setState(snackbarObj)
-    })
+    if(newPool.length > 0) {
+      newPool = newPool[0]
+      store.setStore({ currentPool: newPool })
+    }
   }
 
   configureReturned = () => {
@@ -335,14 +321,7 @@ class Swap extends Component {
     const {
       value,
       account,
-      loading,
-      modalOpen,
-      snackbarMessage,
-      title,
-      titleError,
-      description,
-      descriptionError,
-      votingStatus,
+      pool
     } = this.state
 
     var address = null;
@@ -372,68 +351,106 @@ class Swap extends Component {
           </Card>
         </div>
 
+        
+        { this.renderStake() }
 
-        <div>
-        <div className={ classes.overviewField }>
-  
+
+      </div>
+    )
+  }
+
+
+  renderStake = () => {
+    const { classes, t } = this.props;
+    const { loading, pool } = this.state
+
+    const asset = pool.tokens[0]
+
+    return (
+      <div className={ classes.actions }>
+        {/* <Typography className={ classes.stakeTitle } variant={ 'h3'}>{t('Swap.StakeYourTokens')}</Typography> */}
+        { this.renderAssetInput(asset, 'stake') }
+        <div className={ classes.actionContainer}>
+          <Button
+            fullWidth
+            className={ classes.primaryButton }
+            variant="outlined"
+            color="primary"
+            disabled={  !loading }
+            onClick={ () => { this.onSwap() } }
+            >
+            <Typography className={ classes.stakeButtonText } variant={ 'h4'}>{t('Swap.SwapAction')}</Typography>
+          </Button>
+        </div>
+
+
+      </div>
+    )
+  }
+
+
+  renderAssetInput = (asset, type) => {
+    const {
+      classes
+    } = this.props
+
+    const {
+      loading
+    } = this.state
+
+    const amount = this.state[asset.id + '_' + type]
+    const amountError = this.state[asset.id + '_' + type + '_error']
+
+    return (
+      <div className={ classes.valContainer } key={asset.id + '_' + type}>
         <div className={ classes.balances }>
-          <Typography variant='h4' onClick='#' className={ classes.value } noWrap>{ 'Balance: ' + 20 } COCOS</Typography>
+          { type === 'stake' && <Typography variant='h4' onClick={ () => { this.setAmount(asset.id, type, (asset ? asset.balance : 0)) } } className={ classes.value } noWrap>{ 'Balance: '+ ( asset && asset.balance ? (Math.floor(asset.balance*10000)/10000).toFixed(4) : '0.0000') } { asset ? asset.symbol : '' }</Typography> }
+          { type === 'unstake' && <Typography variant='h4' onClick={ () => { this.setAmount(asset.id, type, (asset ? asset.stakedBalance : 0)) } } className={ classes.value } noWrap>{ 'Balance: '+ ( asset && asset.stakedBalance ? (Math.floor(asset.stakedBalance*10000)/10000).toFixed(4) : '0.0000') } { asset ? asset.symbol : '' }</Typography> }
         </div>
         <div>
           <TextField
             fullWidth
             disabled={ loading }
             className={ classes.actionInput }
-            id={ 'amount' }
-            value={ 2000 }
-            error={ "" }
-            onChange={ this.onChange }
+            id={ '' + asset.id + '_' + type }
+            value={ amount || '' }
+            error={ amountError }
+            onChange={ this.onChange.bind(this, type === 'stake'?( asset && asset.balance ? (Math.floor(asset.balance*10000)/10000).toFixed(4) : '0.0000'):( asset && asset.stakedBalance ? (Math.floor(asset.stakedBalance*10000)/10000).toFixed(4) : '0.0000')) }
             placeholder="0.00"
             variant="outlined"
-            // InputProps={{
-            //   endAdornment: <InputAdornment position="end" className={ classes.inputAdornment }><Typography variant='h3' className={ '' }>{ 'COCOS' }</Typography></InputAdornment>,
-            //   startAdornment: <InputAdornment position="end" className={ classes.inputAdornment }>
-            //     <div className={ classes.assetIcon }>
-            //       <img
-            //         alt=""
-            //         // src={ require('../../assets/'+'-logo.png') }
-            //         src= ""
-            //         height="30px"
-            //       />
-            //     </div>
-            //   </InputAdornment>,
-            // }}
+            InputProps={{
+              endAdornment: <InputAdornment position="end" className={ classes.inputAdornment }><Typography variant='h3' className={ '' }>{ asset.symbol }</Typography></InputAdornment>,
+              startAdornment: <InputAdornment position="end" className={ classes.inputAdornment }>
+                <div className={ classes.assetIcon }>
+                  <img
+                    alt=""
+                    src={ require('../../assets/'+asset.symbol+'-logo.png') }
+                    height="30px"
+                  />
+                </div>
+              </InputAdornment>,
+            }}
           />
-
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={ () => { this.onSwap() }  }
-          >
-            <Typography variant={ 'h4'}>{t('Swap.SwapAction')}</Typography>
-          </Button>
         </div>
-      </div>
-
-
-        </div>
-        
-        {/* { this.renderProposals() }
-        { snackbarMessage && this.renderSnackbar() }
-        { loading && <Loader /> } */}
-
       </div>
     )
   }
 
   onSwap = () => {
-    alert('onswap');
+    this.setState({ amountError: false })
+    const { pool } = this.state
+    const tokens = pool.tokens
+    const selectedToken = tokens[0]
+    const amount = this.state[selectedToken.id + '_stake']
+
+    // if(amount > selectedToken.balance) {
+    //   return false
+    // }
+
+    this.setState({ loading: true })
+    //dispatcher.dispatch({ type: STAKE, content: { asset: selectedToken, amount: amount } })
   }
 
-
-  goToDashboard = () => {
-    window.open('https://gov.yfii.finance/', "_blank")
-  }
 
   handleTabChange = (event, newValue) => {
     this.setState({value:newValue})
@@ -464,10 +481,6 @@ class Swap extends Component {
     this.props.history.push('propose')
   }
 
-  onRegister = () => {
-    this.setState({ loading: true })
-    dispatcher.dispatch({ type: REGISTER_VOTE, content: {  } })
-  }
 
   renderModal = () => {
     return (
@@ -490,6 +503,14 @@ class Swap extends Component {
   closeModal = () => {
     this.setState({ modalOpen: false })
   }
+
+  setAmount = (id, type, balance) => {
+    const bal = (Math.floor((balance === '' ? '0' : balance)*10000)/10000).toFixed(4)
+    let val = []
+    val[id + '_' + type] = bal
+    this.setState(val)
+  }
+
 
 }
 

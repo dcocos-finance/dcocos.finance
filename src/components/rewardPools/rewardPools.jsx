@@ -260,7 +260,6 @@ class RewardPools extends Component {
     }
 
     if(rewardPool.isStart){
-
       return (<div className={ classes.rewardPoolContainer} key={ rewardPool.id } >
         <Typography variant='h3' className={ classes.poolName }>{ rewardPool.id }</Typography>
         <Typography variant='h5' className={ classes.poolWebsite }><a href={ rewardPool.poolLink } target="_blank">{ rewardPool.name }</a></Typography>
@@ -278,7 +277,7 @@ class RewardPools extends Component {
           <Typography variant={ 'h4'}>{t('RewardPools.Open')}</Typography>
         </Button>
       </div>)
-    }else{
+    }else if(!rewardPool.isSwap){
       return (<div className={ classes.rewardPoolContainer} key={ rewardPool.id } >
         <Typography variant='h3' className={ classes.poolName }>{ rewardPool.id }</Typography>
         <Typography variant='h5' className={ classes.poolWebsite }><a href={ rewardPool.poolLink } target="_blank">{ rewardPool.name }</a></Typography>
@@ -294,6 +293,8 @@ class RewardPools extends Component {
           <Typography variant={ 'h4'}>{t('RewardPools.Opening')}</Typography>
         </Button>
       </div>)
+    }else{
+
     }
   }
 

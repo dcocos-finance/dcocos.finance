@@ -125,6 +125,7 @@ class Store {
           depositsEnabled: true,
           contractAddress: config.uniswapPool.rewardContract,
           isVote: false,
+          isSwap: false,
           isStart: config.uniswapPool.isStart,
           tokens: [
             {
@@ -151,6 +152,7 @@ class Store {
           YieldCalculatorLink: config.balancePool.yieldCalculatorLink,  //收益率器地址
           depositsEnabled: true,
           isVote: false,
+          isSwap: false,
           isStart: config.balancePool.isStart,
           tokens: [
             {
@@ -169,31 +171,33 @@ class Store {
             }
           ]
         },
-        // {
-        //   id: 'Governance V2',
-        //   name: 'Governance V2          ',
-        //   website: 'gov.yfii.finance',
-        //   link: 'https://gov.yfii.finance/',
-        //   depositsEnabled: true,
-        //   hiddenHalfTime: true,
-        //   isVote: true,
-        //   tokens: [
-        //     {
-        //       id: 'yfii',
-        //       address: '0xa1d0E215a23d7030842FC67cE582a6aFa3CCaB83',
-        //       symbol: 'YFII',
-        //       abi: config.yfiABI,
-        //       decimals: 18,
-        //       rewardsAddress: config.governanceV2Address,
-        //       rewardsABI: config.governanceV2ABI,
-        //       rewardsSymbol: 'yCrv',
-        //       decimals: 18,
-        //       balance: 0,
-        //       stakedBalance: 0,
-        //       rewardsAvailable: 0,
-        //     }
-        //   ]
-        // }
+        {
+          id: 'Swap',
+          name: 'Swap',
+          poolLink: "",
+          contractAddress: "",
+          YieldCalculatorLink: "",  
+          depositsEnabled: true,
+          isVote: false,
+          isStart: false,
+          isSwap: true,
+          tokens: [
+            {
+              id: 'COCOS',
+              address: config.COCOSAddress,
+              symbol: 'COCOS',
+              abi: config.erc20,
+              decimals: 18,
+            },
+            {
+              id: 'dCOCOS',
+              address: config.dCOCOSAddress,
+              symbol: 'dCOCOS',
+              abi: config.erc20,
+              decimals: 18,
+            }
+          ]
+        }
       ]
     }
 
@@ -330,7 +334,7 @@ class Store {
             callbackInner(null, token)
           })
         }else{
-          // do something
+
         }
       }, (err, tokensData) => {
         if(err) {
@@ -400,7 +404,18 @@ class Store {
   
             callbackInner(null, token)
           })
-        } else {
+        }else if(pool.isSwap){ 
+          async.parallel([
+            (callbackInnerInner) => { this._getERC20Balance(web3, token, account, callbackInnerInner) },
+          ], (err, data) => {
+            if(err) {
+              console.log(err)
+              return callbackInner(err)
+            }
+            token.balance = data[0]
+            callbackInner(null, token)
+          })
+        }else {
           // do something
         }
       }, (err, tokensData) => {
