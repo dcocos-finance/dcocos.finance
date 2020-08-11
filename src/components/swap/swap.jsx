@@ -27,8 +27,11 @@ import Proposal from './proposal'
 import Store from "../../stores/store";
 import { colors } from '../../theme/theme'
 
+import config from "../../config/config";
+
 import {
   ERROR,
+  GET_BALANCES,
   CONFIGURE_RETURNED,
   GET_BALANCES_RETURNED,
 } from '../../constants/constants'
@@ -280,6 +283,8 @@ class Swap extends Component {
       loading: !(account || pool),
       account: account,
     }
+
+    dispatcher.dispatch({ type: GET_BALANCES, content: {} })
   }
 
   componentWillMount() {
@@ -335,11 +340,8 @@ class Swap extends Component {
           {t('Swap.Title')}
         </Typography>
         <Typography variant="h3" className={ classes.subtitle }>
-            <Link href="#" target="_blank" className=  { classes.linkLiquidity } >
-                {t('Stake.AddLiquidity')}
-            </Link>
-            <Link href="#" target="_blank" className={ classes.linkYield } >
-                {t('Footer.YieldCalculator')}
+            <Link href={ config.dCOCOSOperateURL } target="_blank" className=  { classes.linkLiquidity } >
+                {t('Swap.Summary')}
             </Link>
         </Typography>
 

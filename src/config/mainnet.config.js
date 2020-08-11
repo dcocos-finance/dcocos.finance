@@ -41,6 +41,8 @@ const config = {
 
   COCOSGatewayAddress: '0xa08280b4391550200e8e16074d4bf80c466dd8f8',
   COCOSGatewayABI: gateway,
+
+  dCOCOSOperateURL: "https://faq-dcocos",
   
 };
   

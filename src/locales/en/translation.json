@@ -149,5 +149,6 @@
   "Vote.VotesAgainst": "Votes Against",
 
   "Swap.Title": "Swap dCOCOS",
-  "Swap.SwapAction":"Swap"
+  "Swap.SwapAction":"Swap",
+  "Swap.Summary":"操作指南"
 }

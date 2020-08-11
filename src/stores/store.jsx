@@ -384,6 +384,7 @@ class Store {
             callbackInner(null, token)
           })
         } else if(pool.isStart){  
+          //alert("isStart");
           async.parallel([
             (callbackInnerInner) => { this._getERC20Balance(web3, token, account, callbackInnerInner) },
             (callbackInnerInner) => { this._getstakedBalance(web3, token, account, callbackInnerInner) },
@@ -405,6 +406,7 @@ class Store {
             callbackInner(null, token)
           })
         }else if(pool.isSwap){ 
+          //alert("isSwap");
           async.parallel([
             (callbackInnerInner) => { this._getERC20Balance(web3, token, account, callbackInnerInner) },
           ], (err, data) => {

@@ -126,5 +126,6 @@
   "Vote.VotesAgainst": "反对",
 
   "Swap.Title": "兑换dCOCOS",
-  "Swap.SwapAction":"兑换"
+  "Swap.SwapAction":"兑换",
+  "Swap.Summary":"操作指南"
 }
