@@ -4,6 +4,7 @@ import btpABI from './abi/bpt';
 import dcocosABI from './abi/dcocos';
 import rewardABI from './abi/uniswaprRewards';
 import erc20 from "./abi/erc20";
+import gateway from "./abi/gateway";
 
 const config = {
   infuraProvider: 'https://mainnet.infura.io/v3/cd42b3642f1441629f66000f8e544d5d',
@@ -31,8 +32,13 @@ const config = {
     yieldCalculatorLink: "https://yieldfarming.info/yfii/ycrv/",
   },
 
-	dCOCOSAddress: '0xAFfcD3D45cEF58B1DfA773463824c6F6bB0Dc13a',
-	dCOCOSABI: dcocosABI,
+	dCOCOSAddress: '0x693e7b6ae1ddff051d232076ccad485ae94ae45f',
+  dCOCOSABI: dcocosABI,
+  
+  COCOSAddress: '0x104b5bd75f5c509703858434408cb5a23b15cd7e',
+
+  COCOSGatewayAddress: '0xa08280b4391550200e8e16074d4bf80c466dd8f8',
+  COCOSGatewayABI: gateway,
   
 };
   

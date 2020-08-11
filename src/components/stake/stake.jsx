@@ -409,7 +409,7 @@ class Stake extends Component {
     return (
       <div className={ classes.root }>
         <Typography variant="h2" className={ classes.title }>
-          {pool.name}
+          {pool.id}
         </Typography>
         <Typography variant="h3" className={ classes.subtitle }>
             <Link href={ pool.link } target="_blank" className=  { classes.linkLiquidity } >
