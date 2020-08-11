@@ -20,6 +20,7 @@ const config = {
     rewardContractABI: rewardABI,
     poolLink: "app.uniswap.org/#/swap",
     yieldCalculatorLink: "https://yieldfarming.info/yfii/ycrv/",
+    isStart:true,
   },
 
 
@@ -30,6 +31,7 @@ const config = {
     poolLink: "app.uniswap.org/#/swap",
     rewardContractABI: rewardABI,
     yieldCalculatorLink: "https://yieldfarming.info/yfii/ycrv/",
+    isStart:true,
   },
 
 	dCOCOSAddress: '0x693e7b6ae1ddff051d232076ccad485ae94ae45f',

@@ -143,7 +143,7 @@ const styles = theme => ({
     color: colors.darkGray
   },
   overviewValue: {
-    
+    fontSize: '1.75rem',
   },
   halfTime: {
     color: colors.red

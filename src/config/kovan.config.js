@@ -14,12 +14,13 @@ const config = {
   erc20ABI: erc20,
   
   uniswapPool:{
-    erc20Address: '0xb81D3cB2708530ea990a287142b82D058725C092',
+    erc20Address: '##',
     erc20ABI: unsiwapv2lpABI,
-	  rewardContract:"0xd9e1bf85458f7c37ac5d7014a9f2d9c5dfce270b", 
+	  rewardContract:"###", 
 	  rewardContractABI: rewardABI,
-    poolLink: "app.uniswap.org/#/swap",
+    poolLink: "https://app.uniswap.org/#/swap",
     yieldCalculatorLink: "https://yieldfarming.info/yfii/ycrv/",
+    isStart:false,
   },
 
 
@@ -28,8 +29,9 @@ const config = {
     erc20ABI: btpABI,
 	  rewardContract: "0xd9e1bf85458f7c37ac5d7014a9f2d9c5dfce270b",
 	  rewardContractABI: rewardABI,
-    poolLink: "app.uniswap.org/#/swap",
+    poolLink: "https://app.uniswap.org/#/swap",
     yieldCalculatorLink: "https://yieldfarming.info/yfii/ycrv/",
+    isStart:true,
   },
 
 	dCOCOSAddress: '0x693e7b6ae1ddff051d232076ccad485ae94ae45f',

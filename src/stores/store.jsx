@@ -125,6 +125,7 @@ class Store {
           depositsEnabled: true,
           contractAddress: config.uniswapPool.rewardContract,
           isVote: false,
+          isStart: config.uniswapPool.isStart,
           tokens: [
             {
               id: 'uniswap-v2',
@@ -148,8 +149,9 @@ class Store {
           poolLink: config.balancePool.poolLink,
           contractAddress: config.balancePool.rewardContract,
           YieldCalculatorLink: config.balancePool.yieldCalculatorLink,  //收益率器地址
-          depositsEnabled: false,
+          depositsEnabled: true,
           isVote: false,
+          isStart: config.balancePool.isStart,
           tokens: [
             {
               id: 'bpt',
@@ -306,7 +308,7 @@ class Store {
 
             callbackInner(null, token)
           })
-        } else {
+        }else if(pool.isStart){ 
           async.parallel([
             (callbackInnerInner) => { this._getERC20Balance(web3, token, account, callbackInnerInner) },
             (callbackInnerInner) => { this._getstakedBalance(web3, token, account, callbackInnerInner) },
@@ -327,6 +329,8 @@ class Store {
   
             callbackInner(null, token)
           })
+        }else{
+          // do something
         }
       }, (err, tokensData) => {
         if(err) {
@@ -375,7 +379,7 @@ class Store {
 
             callbackInner(null, token)
           })
-        } else {
+        } else if(pool.isStart){  
           async.parallel([
             (callbackInnerInner) => { this._getERC20Balance(web3, token, account, callbackInnerInner) },
             (callbackInnerInner) => { this._getstakedBalance(web3, token, account, callbackInnerInner) },
@@ -396,6 +400,8 @@ class Store {
   
             callbackInner(null, token)
           })
+        } else {
+          // do something
         }
       }, (err, tokensData) => {
         if(err) {

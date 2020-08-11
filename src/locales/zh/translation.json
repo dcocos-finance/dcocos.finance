@@ -88,6 +88,8 @@
   "RewardPools.Open": "打开",
   "RewardPools.SupportedTokens": "支持的代币",
   "RewardPools.NoSupportedTokens": "当前不支持的代币",
+  "RewardPools.Opening": "待开启",
+  "RewardPools.NullContractAddress":"暂无",
 
   "Stake.Title": "YFII-创新型去中心化defi矿池",
   "Stake.Subtitle": "Pool2抵押方式与Balancer使用说明",

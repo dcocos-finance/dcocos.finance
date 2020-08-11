@@ -259,23 +259,42 @@ class RewardPools extends Component {
       tokensList = (tokensList)
     }
 
-    return (<div className={ classes.rewardPoolContainer} key={ rewardPool.id } >
-      <Typography variant='h3' className={ classes.poolName }>{ rewardPool.id }</Typography>
-      <Typography variant='h5' className={ classes.poolWebsite }><a href={ rewardPool.poolLink } target="_blank">{ rewardPool.name }</a></Typography>
-      <Typography varian='h4' className={ classes.tokensList } align='center'>
-        {t('RewardPools.ContractAddress')}<br/>
-        <a href={ config.etherscanSite + "/address/"+ rewardPool.contractAddress } target="_blank">
-          { rewardPool.contractAddress.substring(0,6)+'...'+rewardPool.contractAddress.substring(rewardPool.contractAddress.length-4,rewardPool.contractAddress.length) }
-        </a>
-      </Typography>
-      <Button
-        variant="outlined"
-        color="secondary"
-        onClick={ () => { if(rewardPool.tokens.length > 0) { this.navigateStake(rewardPool) } } }
-      >
-        <Typography variant={ 'h4'}>{t('RewardPools.Open')}</Typography>
-      </Button>
-    </div>)
+    if(rewardPool.isStart){
+
+      return (<div className={ classes.rewardPoolContainer} key={ rewardPool.id } >
+        <Typography variant='h3' className={ classes.poolName }>{ rewardPool.id }</Typography>
+        <Typography variant='h5' className={ classes.poolWebsite }><a href={ rewardPool.poolLink } target="_blank">{ rewardPool.name }</a></Typography>
+        <Typography varian='h4' className={ classes.tokensList } align='center'>
+          {t('RewardPools.ContractAddress')}<br/>
+          <a href={ config.etherscanSite + "/address/"+ rewardPool.contractAddress } target="_blank">
+            { rewardPool.contractAddress.substring(0,6)+'...'+rewardPool.contractAddress.substring(rewardPool.contractAddress.length-4,rewardPool.contractAddress.length) }
+          </a>
+        </Typography>
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={ () => { if(rewardPool.tokens.length > 0) { this.navigateStake(rewardPool) } } }
+        >
+          <Typography variant={ 'h4'}>{t('RewardPools.Open')}</Typography>
+        </Button>
+      </div>)
+    }else{
+      return (<div className={ classes.rewardPoolContainer} key={ rewardPool.id } >
+        <Typography variant='h3' className={ classes.poolName }>{ rewardPool.id }</Typography>
+        <Typography variant='h5' className={ classes.poolWebsite }><a href={ rewardPool.poolLink } target="_blank">{ rewardPool.name }</a></Typography>
+        <Typography varian='h4' className={ classes.tokensList } align='center'>
+          {t('RewardPools.ContractAddress')}<br/>
+          <span>{t('RewardPools.NullContractAddress')}</span>
+        </Typography>
+        <Button
+          variant="outlined"
+          color="secondary"
+          disabled="true"
+        >
+          <Typography variant={ 'h4'}>{t('RewardPools.Opening')}</Typography>
+        </Button>
+      </div>)
+    }
   }
 
   navigateStake = (rewardPool) => {

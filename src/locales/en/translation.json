@@ -112,6 +112,8 @@
   "RewardPools.Open": "Open",
   "RewardPools.SupportedTokens": "Supported Tokens",
   "RewardPools.NoSupportedTokens": "No supported tokens currently",
+  "RewardPools.Opening": "待开启",
+  "RewardPools.NullContractAddress":"null",
 
   "Stake.Title": "FYI on YFII: an open letter from YFII community",
   "Stake.Wallet": "Wallet",
