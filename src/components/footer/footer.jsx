@@ -31,7 +31,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-
+import HomeIcon from '@material-ui/icons/Home';
+// import GitHubIcon from '@material-ui/icons/GitHub';
+// import TwitterIcon from '@material-ui/icons/Twitter';
 
 const store = Store.store
 
@@ -249,7 +251,7 @@ class Footer extends Component {
       >
         <Toolbar>
           <Typography variant="h6" noWrap className={classes.title}>
-          <Link href="/"  className={classes.titleColor}  >{t('Footer.Home')}</Link>
+          <Link href="/"  className={classes.titleColor}  ><HomeIcon color="white" /></Link>
           </Typography>
           <Button aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick}  className={classes.titleColor} >{language}</Button>
             <Menu
@@ -310,21 +312,37 @@ class Footer extends Component {
         </div>
         <Divider />
         <List>
-          {['FAQ', 'Audit'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key='GitHub'>
+            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemText><Link href="https://github.com/dcocos-finance" target="_blank">GitHub</Link> </ListItemText>
+          </ListItem>
+          <ListItem button key='Audit'>
+            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemText><Link href="#" target="_blank">Audit</Link> </ListItemText>
+          </ListItem>
+          <ListItem button key='FAQ'>
+            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemText><Link href="#" target="_blank">FAQ</Link> </ListItemText>
+          </ListItem>
         </List>
         <Divider />
         <List>
-          {['Github', 'Twitter', 'Discord', 'Telegram'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key='Twitter'>
+            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemText><Link href="#" target="_blank">Twitter</Link> </ListItemText>
+          </ListItem>
+          <ListItem button key='Telegram'>
+            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemText><Link href="#" target="_blank">Telegram</Link> </ListItemText>
+          </ListItem>
+          <ListItem button key='WeChat'>
+            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemText><Link href="#" target="_blank">WeChat</Link> </ListItemText>
+          </ListItem>
+          <ListItem button key='Discord'>
+            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemText><Link href="#" target="_blank">Discord</Link> </ListItemText>
+          </ListItem>                          
         </List>
       </Drawer>
     </div>
