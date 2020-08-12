@@ -12,15 +12,28 @@ const config = {
   etherscanSite:"https://kovan.etherscan.io",
 
   erc20ABI: erc20,
+
+  dCOCOSAddress: '0x693e7b6ae1ddff051d232076ccad485ae94ae45f',
+  dCOCOSABI: dcocosABI,
+  
+  COCOSAddress: '0x104b5bd75f5c509703858434408cb5a23b15cd7e',
+
+
+  COCOSGatewayAddress: '0xa08280b4391550200e8e16074d4bf80c466dd8f8',
+  COCOSGatewayABI: gateway,
+
+  dCOCOSOperateURL: "https://faq-dcocos",
+
+  DAIAddress: "0x4f96fe3b7a6cf9725f59d353f723c1bdb64ca6aa",
   
   uniswapPool:{
-    erc20Address: '##',
+    erc20Address: '0xd17599A79834B255723335F6b5A3dB46aeb8A3b4',
     erc20ABI: unsiwapv2lpABI,
-	  rewardContract:"###", 
+	  rewardContract:"0xC2A911e4E9078aa1321D64567097080291170f14", 
 	  rewardContractABI: rewardABI,
-    poolLink: "https://app.uniswap.org/#/swap",
-    yieldCalculatorLink: "https://yieldfarming.info/yfii/ycrv/",
-    isStart:false,
+    poolLink: "https://app.uniswap.org/#/swap?inputCurrency=0x4f96fe3b7a6cf9725f59d353f723c1bdb64ca6aa&outputCurrency=0x693e7b6ae1ddff051d232076ccad485ae94ae45f",
+    yieldCalculatorLink: "https://yieldfarming.info/dcocos/uniswap/",
+    isStart:true,
   },
 
 
@@ -31,20 +44,8 @@ const config = {
 	  rewardContractABI: rewardABI,
     poolLink: "https://app.uniswap.org/#/swap",
     yieldCalculatorLink: "https://yieldfarming.info/yfii/ycrv/",
-    isStart:true,
-  },
-
-	dCOCOSAddress: '0x693e7b6ae1ddff051d232076ccad485ae94ae45f',
-  dCOCOSABI: dcocosABI,
-  
-  COCOSAddress: '0x104b5bd75f5c509703858434408cb5a23b15cd7e',
-
-
-  COCOSGatewayAddress: '0xa08280b4391550200e8e16074d4bf80c466dd8f8',
-  COCOSGatewayABI: gateway,
-
-  dCOCOSOperateURL: "https://faq-dcocos",
-  
+    isStart:false,
+  },  
 };
   
 export default config;

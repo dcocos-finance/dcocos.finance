@@ -131,7 +131,7 @@ class Store {
             {
               id: 'uniswap-v2',
               address: config.uniswapPool.erc20Address,
-              symbol: 'Uniswap V2',
+              symbol: 'UniswapV2',
               abi: config.uniswapPool.erc20ABI,
               decimals: 18,
               rewardsAddress: config.uniswapPool.rewardContract,
