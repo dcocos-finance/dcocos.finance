@@ -29,7 +29,7 @@ const config = {
   uniswapPool:{
     erc20Address: '0xd17599A79834B255723335F6b5A3dB46aeb8A3b4',
     erc20ABI: unsiwapv2lpABI,
-	  rewardContract:"0xC2A911e4E9078aa1321D64567097080291170f14", 
+	  rewardContract:"0xe49cC4b8917f47778d45d6fDb9128061A645b913", 
 	  rewardContractABI: rewardABI,
     poolLink: "https://app.uniswap.org/#/swap?inputCurrency=0x4f96fe3b7a6cf9725f59d353f723c1bdb64ca6aa&outputCurrency=0x693e7b6ae1ddff051d232076ccad485ae94ae45f",
     yieldCalculatorLink: "https://yieldfarming.info/dcocos/uniswap/",

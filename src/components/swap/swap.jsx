@@ -31,6 +31,8 @@ import config from "../../config/config";
 
 import {
   ERROR,
+  SWAP,
+  SWAP_RETURNED,
   GET_BALANCES,
   CONFIGURE_RETURNED,
   GET_BALANCES_RETURNED,
@@ -289,12 +291,14 @@ class Swap extends Component {
 
   componentWillMount() {
     emitter.on(ERROR, this.errorReturned);
+    emitter.on(SWAP_RETURNED, this.showHash);
     emitter.on(CONFIGURE_RETURNED, this.configureReturned)
     emitter.on(GET_BALANCES_RETURNED, this.balancesReturned);
   }
 
   componentWillUnmount() {
     emitter.removeListener(ERROR, this.errorReturned);
+    emitter.removeListener(SWAP_RETURNED, this.showHash);
     emitter.removeListener(CONFIGURE_RETURNED, this.configureReturned)
     emitter.removeListener(GET_BALANCES_RETURNED, this.balancesReturned);
   };
@@ -378,7 +382,7 @@ class Swap extends Component {
             className={ classes.primaryButton }
             variant="outlined"
             color="primary"
-            disabled={  !loading }
+            // disabled={  !loading }
             onClick={ () => { this.onSwap() } }
             >
             <Typography className={ classes.stakeButtonText } variant={ 'h4'}>{t('Swap.SwapAction')}</Typography>
@@ -417,7 +421,7 @@ class Swap extends Component {
             id={ '' + asset.id + '_' + type }
             value={ amount || '' }
             error={ amountError }
-            onChange={ this.onChange.bind(this, type === 'stake'?( asset && asset.balance ? (Math.floor(asset.balance*10000)/10000).toFixed(4) : '0.0000'):( asset && asset.stakedBalance ? (Math.floor(asset.stakedBalance*10000)/10000).toFixed(4) : '0.0000')) }
+            onChange={ this.onChange.bind(this, asset && asset.balance ? (Math.floor(asset.balance*10000)/10000).toFixed(4) : '0.0000') }
             placeholder="0.00"
             variant="outlined"
             InputProps={{
@@ -438,20 +442,32 @@ class Swap extends Component {
     )
   }
 
+  onChange = (value, event) => {
+    let val = []
+    val[event.target.id] = value > parseFloat(event.target.value) ? event.target.value : (value + '')
+    console.log(val)
+    this.setState(val)
+  }
+
   onSwap = () => {
+  
     this.setState({ amountError: false })
     const { pool } = this.state
     const tokens = pool.tokens
     const selectedToken = tokens[0]
+    console.log(selectedToken)
+    console.log(selectedToken.id + '_stake')
     const amount = this.state[selectedToken.id + '_stake']
+    console.log("amount" + amount)
 
     // if(amount > selectedToken.balance) {
     //   return false
     // }
 
     this.setState({ loading: true })
-    //dispatcher.dispatch({ type: STAKE, content: { asset: selectedToken, amount: amount } })
+    dispatcher.dispatch({ type: SWAP, content: { asset: selectedToken, amount: amount } })
   }
+
 
 
   handleTabChange = (event, newValue) => {
@@ -473,11 +489,23 @@ class Swap extends Component {
     });
   }
 
-  onChange = (event) => {
-    let val = []
-    val[event.target.id] = event.target.value
-    this.setState(val)
+  showHash  = (txHash) => {
+    this.setState({ snackbarMessage: null, snackbarType: null, loading: false })
+    const that = this
+    setTimeout(() => {
+      const snackbarObj = { snackbarMessage: txHash, snackbarType: 'Hash' }
+      that.setState(snackbarObj)
+    })
   }
+  // onChange = (event) => {
+  //   alert(event);
+  //   alert(event.target);
+  //   alert(event.target.value);
+  //   alert(event.traget.id);
+  //   let val = []
+  //   val[event.target.id] = event.target.value
+  //   this.setState(val)
+  // }
 
   onPropose = () => {
     this.props.history.push('propose')

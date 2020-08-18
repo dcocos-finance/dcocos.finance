@@ -9,6 +9,10 @@ export const CONFIGURE_RETURNED = 'CONFIGURE_RETURNED'
 export const STAKE = 'STAKE'
 export const STAKE_RETURNED = 'STAKE_RETURNED'
 
+
+export const SWAP = 'SWAP'
+export const SWAP_RETURNED = 'SWAP_RETURNED'
+
 export const GET_REWARDS = 'GET_REWARDS'
 export const GET_REWARDS_RETURNED = 'GET_REWARDS_RETURNED'
 

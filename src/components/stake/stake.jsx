@@ -412,7 +412,7 @@ class Stake extends Component {
           {pool.id}
         </Typography>
         <Typography variant="h3" className={ classes.subtitle }>
-            <Link href={ pool.link } target="_blank" className=  { classes.linkLiquidity } >
+            <Link href={ pool.poolLink } target="_blank" className=  { classes.linkLiquidity } >
                 {t('Stake.AddLiquidity')}
             </Link>
             <Link href={ pool.YieldCalculatorLink } target="_blank" className={ classes.linkYield } >

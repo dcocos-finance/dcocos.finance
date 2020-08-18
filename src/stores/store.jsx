@@ -11,6 +11,8 @@ import {
   GET_BALANCES_PERPETUAL_RETURNED,
   STAKE,
   STAKE_RETURNED,
+  SWAP,
+  SWAP_RETURNED,
   WITHDRAW,
   WITHDRAW_RETURNED,
   GET_REWARDS,
@@ -53,6 +55,7 @@ import {
   torus,
   authereum
 } from "./connectors";
+import { SSL_OP_NETSCAPE_CA_DN_BUG } from "constants";
 
 const rp = require('request-promise');
 const ethers = require('ethers');
@@ -215,6 +218,9 @@ class Store {
             break;
           case STAKE:
             this.stake(payload);
+            break;
+          case SWAP:
+            this.swap(payload);
             break;
           case WITHDRAW:
             this.withdraw(payload);
@@ -583,7 +589,6 @@ class Store {
   stake = (payload) => {
     const account = store.getStore('account')
     const { asset, amount } = payload.content
-
     this._checkApproval(asset, account, amount, asset.rewardsAddress, (err) => {
       if(err) {
         return emitter.emit(ERROR, err);
@@ -598,6 +603,69 @@ class Store {
       })
     })
   }
+
+  swap = (payload) => {
+    const account = store.getStore('account')
+    const { asset, amount } = payload.content
+    console.log(config.COCOSGatewayAddress)
+    asset.abi = config.erc20ABI; // todo:
+    this._checkApproval(asset, account, amount, config.COCOSGatewayAddress, (err) => {
+      if(err) {
+        return emitter.emit(ERROR, err);
+      }
+
+      this._callSwap(asset, account, amount, (err, res) => {
+        if(err) {
+          return emitter.emit(ERROR, err);
+        }
+
+        return emitter.emit(SWAP_RETURNED, res)
+      })
+    })
+  }
+
+  _callSwap = async (asset, account, amount, callback) => {
+    const web3 = new Web3(store.getStore('web3context').library.provider);
+
+    const gatewayContract = new web3.eth.Contract(config.COCOSGatewayABI, config.COCOSGatewayAddress)
+
+    var amountToSend = web3.utils.toWei(amount, "ether")
+    if (asset.decimals != 18) {
+      amountToSend = (amount*10**asset.decimals).toFixed(0);
+    }
+
+    gatewayContract.methods.swapDCOCOS(amountToSend).send({ from: account.address, gasPrice: web3.utils.toWei(await this._getGasPrice(), 'gwei') })
+      .on('transactionHash', function(hash){
+        console.log(hash)
+        callback(null, hash)
+      })
+      .on('confirmation', function(confirmationNumber, receipt){
+        console.log(confirmationNumber, receipt);
+        if(confirmationNumber == 2) {
+          dispatcher.dispatch({ type: GET_BALANCES, content: {} })
+        }
+      })
+      .on('receipt', function(receipt){
+        console.log(receipt);
+      })
+      .on('error', function(error) {
+        if (!error.toString().includes("-32601")) {
+          if(error.message) {
+            return callback(error.message)
+          }
+          callback(error)
+        }
+      })
+      .catch((error) => {
+        if (!error.toString().includes("-32601")) {
+          if(error.message) {
+            return callback(error.message)
+          }
+          callback(error)
+        }
+      })
+  }
+
 
   _callStake = async (asset, account, amount, callback) => {
     const web3 = new Web3(store.getStore('web3context').library.provider);
