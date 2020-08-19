@@ -143,7 +143,8 @@ const styles = theme => ({
     width: '100%',
     color: colors.darkGray,
     minWidth: '100%',
-    marginLeft: '20px'
+    marginLeft: '20px',
+    textAlign:'center',
   },
   poolName: {
     paddingBottom: '20px',

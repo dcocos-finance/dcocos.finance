@@ -318,31 +318,31 @@ class Footer extends Component {
           </ListItem>
           <ListItem button key='Audit'>
             <ListItemIcon> <InboxIcon /></ListItemIcon>
-            <ListItemText><Link href="#" target="_blank">Audit</Link> </ListItemText>
+            <ListItemText><Link href="https://github.com/dcocos-finance/audit" target="_blank">Audit</Link> </ListItemText>
           </ListItem>
           <ListItem button key='FAQ'>
             <ListItemIcon> <InboxIcon /></ListItemIcon>
-            <ListItemText><Link href="#" target="_blank">FAQ</Link> </ListItemText>
+            <ListItemText><Link href="https://github.com/dcocos-finance/doc/blob/master/faq" target="_blank">FAQ</Link> </ListItemText>
           </ListItem>
         </List>
         <Divider />
         <List>
           <ListItem button key='Twitter'>
             <ListItemIcon> <InboxIcon /></ListItemIcon>
-            <ListItemText><Link href="#" target="_blank">Twitter</Link> </ListItemText>
+            <ListItemText><Link href="https://twitter.com/CocosBCX" target="_blank">Twitter</Link> </ListItemText>
           </ListItem>
           <ListItem button key='Telegram'>
             <ListItemIcon> <InboxIcon /></ListItemIcon>
-            <ListItemText><Link href="#" target="_blank">Telegram</Link> </ListItemText>
-          </ListItem>
-          <ListItem button key='WeChat'>
-            <ListItemIcon> <InboxIcon /></ListItemIcon>
-            <ListItemText><Link href="#" target="_blank">WeChat</Link> </ListItemText>
+            <ListItemText><Link href="https://t.me/cocosbcxen" target="_blank">Telegram</Link> </ListItemText>
           </ListItem>
           <ListItem button key='Discord'>
             <ListItemIcon> <InboxIcon /></ListItemIcon>
-            <ListItemText><Link href="#" target="_blank">Discord</Link> </ListItemText>
-          </ListItem>                          
+            <ListItemText><Link href="https://discord.gg/jdJMNtC" target="_blank">Discord</Link> </ListItemText>
+          </ListItem> 
+          <ListItem button key='WeChat'>
+            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemText><Link href="https://t.me/cocosbcxen" target="_blank">WeChat</Link> </ListItemText>
+          </ListItem>                         
         </List>
       </Drawer>
     </div>
