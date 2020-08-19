@@ -6,6 +6,15 @@ import { withNamespaces } from 'react-i18next';
 import i18n from '../../i18n';
 import { colors } from '../../theme'
 
+
+import TwitterIcon from '@material-ui/icons/Twitter';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import HelpIcon from '@material-ui/icons/Help';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import TelegramIcon from '@material-ui/icons/Telegram';
+import RedditIcon from '@material-ui/icons/Reddit';
+
+
 import Store from "../../stores";
 import {
   Typography,
@@ -313,43 +322,39 @@ class Footer extends Component {
         <Divider />
         <List>
           <ListItem button key='GitHub'>
-            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemIcon> <GitHubIcon /></ListItemIcon>
             <ListItemText><Link href="https://github.com/dcocos-finance" target="_blank">GitHub</Link> </ListItemText>
           </ListItem>
           <ListItem button key='Audit'>
-            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemIcon> <VerifiedUserIcon /></ListItemIcon>
             <ListItemText><Link href="https://github.com/dcocos-finance/audit" target="_blank">Audit</Link> </ListItemText>
           </ListItem>
           <ListItem button key='FAQ'>
-            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemIcon> <HelpIcon /></ListItemIcon>
             <ListItemText><Link href="https://github.com/dcocos-finance/doc/blob/master/faq" target="_blank">FAQ</Link> </ListItemText>
           </ListItem>
         </List>
         <Divider />
         <List>
           <ListItem button key='Twitter'>
-            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemIcon> <TwitterIcon /></ListItemIcon>
             <ListItemText><Link href="https://twitter.com/CocosBCX" target="_blank">Twitter</Link> </ListItemText>
           </ListItem>
           <ListItem button key='Telegram'>
-            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemIcon> <TelegramIcon /></ListItemIcon>
             <ListItemText><Link href="https://t.me/cocosbcxen" target="_blank">Telegram</Link> </ListItemText>
           </ListItem>
           <ListItem button key='Discord'>
-            <ListItemIcon> <InboxIcon /></ListItemIcon>
+            <ListItemIcon> <RedditIcon /></ListItemIcon>
             <ListItemText><Link href="https://discord.gg/jdJMNtC" target="_blank">Discord</Link> </ListItemText>
-          </ListItem> 
-          <ListItem button key='WeChat'>
-            <ListItemIcon> <InboxIcon /></ListItemIcon>
-            <ListItemText><Link href="https://t.me/cocosbcxen" target="_blank">WeChat</Link> </ListItemText>
-          </ListItem>                         
+          </ListItem>                        
         </List>
       </Drawer>
     </div>
   );
 
-    
-
+  
+  
     // return (
     // <div className={classes.root}>
     //   <div className={classes.alert}>
